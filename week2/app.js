@@ -1,10 +1,19 @@
 import { createServer } from 'http';
 
 const server = createServer((req, res)=>{
-    if(req.method === 'GET'){
+    if(req.method === 'GET' && req.url === '/json'){
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end('This is a Get request')
-    } else if(req.method === 'POST'){
+        const jsonResponse = {
+            message: 'Hello, json',
+            status: 200
+        }
+        res.end(
+            JSON.stringify(jsonResponse)
+        )
+    }else if(req.method === 'GET' && req.url === '/html'){
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end('<h1>Hello, HTML</h1>');
+    }else if(req.method === 'POST'){
         res.writeHead(200,{'content-type': 'test/plain'});
         res.end('This is a POST request');
     }else{
