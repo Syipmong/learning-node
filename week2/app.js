@@ -1,6 +1,6 @@
-const http = require('http');
+import {createServer} from 'node:http'
 
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
   if(req.url === '/'){
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(
