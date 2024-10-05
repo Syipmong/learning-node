@@ -1,34 +1,22 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
 
+// Middleware to parse JSON and form data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-    '/',
-    (req,res,next)=>{
-        console.log(
-            `${req.method} Method on ${req.url}`
-        )
-        next();
-    }
-)
+// Handle GET request
+app.get('/', (req, res) => {
+  res.send('Submit your data using POST to /submit');
+});
 
-app.get(
-    '/',
-    (req, res) =>{
-        res.send('Hello World');
-    }
-);
+// Handle POST request
+app.post('/submit', (req, res) => {
+  const { name, email } = req.body;
+  res.send(`Received data: Name - ${name}, Email - ${email}`);
+});
 
-app.get(
-    '/about',
-    (req,res) =>{
-        res.send('About Us');
-    }
-);
-
-
-app.listen(
-    port,
-    () => console.log(`Listening on port ${port}...`)
-)
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
