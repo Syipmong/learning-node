@@ -39,6 +39,21 @@ app.post('/api/users', (req,res)=>{
     res.status(201).json(newUser)
 })
 
+app.put('/api/users/:id', (req, res)=>{
+    const user = users.find(u => u.id === parseInt(req.params.id));
+
+    if(!user){
+        res.status(404).send("User is not found");
+    }
+    user.name = req.body.name,
+    user.age = req.body.age,
+    user.email = req.body.email,
+    user.city = req.body.city
+
+
+    res.json(user)
+})
+
 
 
 app.listen(
