@@ -50,19 +50,18 @@ app.put('/api/users/:id', (req, res)=>{
     user.email = req.body.email,
     user.city = req.body.city
 
-
+    if(!req.body.name || !req.body.email) return res.status(400).json({
+        message: "Name and email are required"
+    } )
     res.json(user)
 })
 
-app.delete('api/users/:id', (req, res)=>{
+app.delete('/api/users/:id', (req, res)=>{
     const userIndex = users.findIndex(u => u.id === parseInt(req.params.id));
-    if(userIndex === -1) return res.status(404).send("User is not found")
-
-
-        const deleteUser = users.splice(userIndex, 1)
-        res.json(deleteUser)
+    if(userIndex === -1) return res.status(404).send("User is not found");
+        const deletedUser = users.splice(userIndex, 1);
+        res.json(deletedUser)
 })
-
 
 
 app.listen(
