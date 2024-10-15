@@ -4,7 +4,7 @@
     "express": "^4.21.0"
   },
   "scripts": {
-    "start": "node week5/app.js"
-
+    "start": "node week5/app.js",
+    "dev": "nodemon week5/app.js"
   }
 }

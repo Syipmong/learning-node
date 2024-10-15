@@ -9,7 +9,8 @@ let users = [
     {id: 2, name: 'Bob', email: 'bob@gmail.com', age: 30, city: 'Los Angeles'},
     {id: 3, name: 'Charlie', email: 'charlie@gmail.com', age: 35, city: 'Chicago'},
     {id: 4, name: 'David', email: 'david@gmail.com', age: 40, city: 'Houston'},
-    {id: 5, name: 'Eve', email: 'eve@gmail.com', age: 28, city: 'Phoenix'}
+    {id: 5, name: 'Eve', email: 'eve@gmail.com', age: 28, city: 'Phoenix'},
+    {id: 6, name: 'Frank', email: 'frank@gmail.com', age:33, city:'laos'}
 ]
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
