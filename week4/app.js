@@ -54,6 +54,15 @@ app.put('/api/users/:id', (req, res)=>{
     res.json(user)
 })
 
+app.delete('api/users/:id', (req, res)=>{
+    const userIndex = users.findIndex(u => u.id === parseInt(req.params.id));
+    if(userIndex === -1) return res.status(404).send("User is not found")
+
+
+        const deleteUser = users.splice(userIndex, 1)
+        res.json(deleteUser)
+})
+
 
 
 app.listen(
