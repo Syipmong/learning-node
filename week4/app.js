@@ -27,6 +27,18 @@ app.get('/api/users/:id', (req,res)=>{
     res.json(user)
 })
 
+app.post('/api/users', (req,res)=>{
+    const newUser = {
+        id: users.length + 1,
+        name: req.body.name,
+        email: req.body.email,
+        age: req.body.age,
+        city: req.body.city
+    }
+    users.push(newUser)
+    res.status(201).json(newUser)
+})
+
 
 
 app.listen(
