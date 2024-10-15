@@ -21,3 +21,20 @@ Examples: MongoDB, CouchDB.
 Flexible Schema: No fixed schema, making it ideal for rapidly evolving data structures.
 When to Use: When you need high scalability or are working with large volumes of unstructured data.
 Since MongoDB is one of the most popular NoSQL databases and pairs well with Node.js, we will focus on MongoDB in this session.
+
+## Reflection for Week 5: Working with Databases
+
+### Key Takeaways
+
+Topics Covered:
+
+SQL vs NoSQL: Understanding the differences and when to use each.
+MongoDB Setup: Connected Node.js to a MongoDB database using Mongoose.
+CRUD Operations: Implemented full CRUD functionality for users in MongoDB.
+Validation and Error Handling: Added validation rules and error handling in Mongoose.
+Optional SQL: Brief introduction to using SQL with Node.js.
+Key Learnings:
+
+Mongoose makes it easy to work with MongoDB and define schemas for data.
+Validation in Mongoose ensures that data is saved in the correct format.
+CRUD operations with a database allow us to persist data in a structured way, beyond just in-memory storage.
