@@ -13,6 +13,10 @@ let users = [
 ]
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+app.use((e, req, res, next)=>{
+    console.log(e.stack),
+    res.status(500).send('Something went wrong')
+})
 
 
 app.get('/api/users',(req,res)=>{
