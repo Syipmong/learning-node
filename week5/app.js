@@ -36,6 +36,14 @@ app.post(
     }
 );
 
+app.get('/api/users', (req, res)=>{
+    User.find().then(users => {
+        res.send(users);
+    }).catch(err => {
+        res.status(500).send('Server error');
+    });
+})
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
