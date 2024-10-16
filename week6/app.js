@@ -30,6 +30,14 @@ app.get('/', (_req, res) => {
     res.send("Hello world");
 });
 
+app.get('/api/users',(_req, res) =>{
+    User.find().then(users => {
+        res.send(users);
+    }).catch(err => {
+        res.status(500).send('Server error');
+    });
+})
+
 app.post('/api/register', async (req, res) => {
     try {
         const { name, email, password } = req.body;
