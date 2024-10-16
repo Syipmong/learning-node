@@ -45,6 +45,11 @@ app.get('/', (_req, res) => {
     res.send("Hello world");
 });
 
+app.get('/api/me', auth, async (req,res)=>{
+    const user = await User.findOne(req.user._id).select('-password');
+    res.send(user)
+})
+
 app.get('/api/users',(_req, res) =>{
     User.find().then(users => {
         res.send(users);
