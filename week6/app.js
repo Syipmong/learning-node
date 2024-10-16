@@ -68,12 +68,13 @@ app.post(
 
         try {
             const {email, password} = _req.body;
-           const user = User.findOne({email})
+
+           const user = await User.findOne({email})
            if(!user) return res.status(400).send('Invalid email or password');
     
            
            const validPassword = await bcrypt.compare(password, user.password);
-             if(!validPassword) res.status(400).send('Invalid email or password');
+             if(!validPassword) return res.status(400).send('Invalid email or password');
     
              const token = jwt.sign({ _id: user._id, email: user.email}, jwtSecret, {expiresIn: '1h'})
     
