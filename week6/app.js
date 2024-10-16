@@ -1,41 +1,58 @@
-const express = require('express')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const app = express()
-const bodyParser = require('body-parser')
-const User = require('../models/user')
-const PORT = 3000
+const express = require('express');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const User = require('../models/user');
+const app = express();
+const PORT = 3000;
 
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
 
-app.get('/',(req,res)=>{
-    res.send("Hello world")
-})
+// MongoDB connection
+const mongoURI = 'mongodb://localhost/mydatabase';
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000
+});
 
-app.post(
-    '/api/register', async (req,res) =>{
-        try{
-            const {email, name, password} = req.body;
+mongoose.connection.on('connected', () => {
+    console.log('Connected to MongoDB');
+});
 
-            let user = await User.findOne({email})
-            if(user) return res.status(400).send("User already exists")
+mongoose.connection.on('error', (err) => {
+    console.error('Error connecting to MongoDB:', err.message);
+});
 
-                const salt = await bcrypt.genSalt(10)
-                const hashedPassword = await bcrypt.hash(password, salt)
+app.get('/', (_req, res) => {
+    res.send("Hello world");
+});
 
-                user = new User({
-                    name,
-                    email,
-                    password: hashedPassword
-                })
-                await user.save();
-        }
-        catch(err){
-            console.log(err)
-        }
+app.post('/api/register', async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        let user = await User.findOne({ email });
+        if (user) return res.status(400).send("User already exists");
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user = new User({
+            name,
+            email,
+            password: hashedPassword
+        });
+        await user.save();
+
+        res.send('User registered successfully');
+    } catch (err) {
+        res.status(400).send(err.message);
     }
+});
 
-)
-
-app.listen(PORT, ()=>{
-    console.log("Server is running on http://localhost:3000")
-})
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
