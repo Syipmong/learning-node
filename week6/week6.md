@@ -37,3 +37,15 @@ bcrypt: For hashing passwords securely.
 ```bash
 npm install jsonwebtoken bcrypt
 ```
+
+### 2.2 User Registration with Password Hashing
+
+Let’s start by updating our User model to include a password field and implement password hashing during registration
+
+### 2.3 User Login and Token Generation
+
+## User Authorization
+
+### 3.1 Creating a Middleware for Authentication
+
+We create a middleware function that verifies the JWT before allowing access to protected routes.
