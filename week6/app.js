@@ -61,6 +61,20 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
+app.post(
+    '/api/login', async (_req, res) =>{
+        const {email, password} = req.body;
+       const user = User.findOne({email})
+       if(!user) return res.status(400).send('Invalid email or password');
+
+       
+       const validPassword = await bcrypt.compare(password, user.password);
+         if(!validPassword) res.status(400).send('Invalid email or password');
+
+         const token = jwt.sign({ _id: user._id, email: user.email}, {}, {expiresIn: '1h'})
+    }
+)
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
