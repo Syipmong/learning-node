@@ -1,13 +1,15 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.1",
     "mysql": "^2.18.1",
     "pg": "^8.13.0"
   },
   "scripts": {
-    "start": "node week5/app.js",
-    "dev": "nodemon week5/app.js"
+    "start": "node week6/app.js",
+    "dev": "nodemon week6/app.js"
   }
 }
