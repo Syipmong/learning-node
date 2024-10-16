@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('../models/user');
+const crypto = require('crypto');
 const app = express();
 const PORT = 3000;
 
@@ -13,8 +14,6 @@ app.use(bodyParser.json());
 // MongoDB connection
 const mongoURI = 'mongodb://localhost/mydatabase';
 mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000
 });
 
@@ -25,6 +24,9 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
     console.error('Error connecting to MongoDB:', err.message);
 });
+
+const jwtSecret = crypto.randomBytes(64).toString('hex');
+console.log(jwtSecret);
 
 app.get('/', (_req, res) => {
     res.send("Hello world");
@@ -63,15 +65,24 @@ app.post('/api/register', async (req, res) => {
 
 app.post(
     '/api/login', async (_req, res) =>{
-        const {email, password} = req.body;
-       const user = User.findOne({email})
-       if(!user) return res.status(400).send('Invalid email or password');
 
-       
-       const validPassword = await bcrypt.compare(password, user.password);
-         if(!validPassword) res.status(400).send('Invalid email or password');
+        try {
+            const {email, password} = _req.body;
+           const user = User.findOne({email})
+           if(!user) return res.status(400).send('Invalid email or password');
+    
+           
+           const validPassword = await bcrypt.compare(password, user.password);
+             if(!validPassword) res.status(400).send('Invalid email or password');
+    
+             const token = jwt.sign({ _id: user._id, email: user.email}, jwtSecret, {expiresIn: '1h'})
+    
+             res.send({token})
+        } catch (err) {
 
-         const token = jwt.sign({ _id: user._id, email: user.email}, {}, {expiresIn: '1h'})
+            res.status(400).send(err.message)
+            
+        }
     }
 )
 
