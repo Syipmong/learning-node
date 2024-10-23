@@ -31,7 +31,16 @@ Load Balancing: Distribute incoming requests across multiple servers using clust
 
 #### 1.3 Techniques for Performance Tuning
 
-1.3.1 Clustering
+#### 1.3.1 Clustering
 
 Node.js operates on a single thread by default, but you can use clustering to take advantage of multi-core systems.
 With the cluster module, you can spawn multiple instances of your application, each running on a different core.
+
+#### 1.3.2 Caching with Redis
+
+Caching frequently requested data can reduce load times and the strain on your database. Redis is a common choice for caching in Node.js.
+Install Redis and its Node.js client: npm install redis.
+
+#### 1.3.3 Profiling with node --inspect
+
+Use Node’s built-in inspector for profiling performance. You can monitor memory usage, CPU, and more.
