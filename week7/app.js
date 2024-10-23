@@ -23,11 +23,11 @@ if(cluster.isMaster){
 
 
 }else{
-    http.createServer()
+    http.createServer((req, res)=>{
+        res.writeHead(200)
+        res.end('Hello I am week 7')
+    }).listen(
+        8000,
+        () => console.log('Running on Port 8000')
+    )
 }
-
-
-app.listen(
-    PORT,
-    () => console.log(`Server running on http://localhost:${PORT}`)
-)
