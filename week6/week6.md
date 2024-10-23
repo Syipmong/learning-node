@@ -49,3 +49,17 @@ Let’s start by updating our User model to include a password field and impleme
 ### 3.1 Creating a Middleware for Authentication
 
 We create a middleware function that verifies the JWT before allowing access to protected routes.
+
+# Reflection for Week 6: User Authentication with JWT and Authorization
+
+## Topics Covered
+
+JWT Authentication: Implemented JWT-based authentication for user login and registration.
+Password Hashing: Used bcrypt to securely hash user passwords.
+Protected Routes: Implemented middleware to protect routes and restrict access to authenticated users.
+Authorization: Ensured only authorized users can access certain endpoints by verifying the JWT.
+Key Learnings:
+
+JWTs provide a stateless way to authenticate users in modern web applications.
+Middleware in Express.js makes it easy to secure routes and add authorization logic.
+Password security with hashing is essential for protecting user data.

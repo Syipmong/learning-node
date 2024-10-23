@@ -8,10 +8,8 @@ const crypto = require('crypto');
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// MongoDB connection
 const mongoURI = 'mongodb://localhost/mydatabase';
 mongoose.connect(mongoURI, {
     serverSelectionTimeoutMS: 5000

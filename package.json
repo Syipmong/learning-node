@@ -10,7 +10,7 @@
     "pg": "^8.13.0"
   },
   "scripts": {
-    "start": "node week6/app.js",
-    "dev": "nodemon week6/app.js"
+    "start": "node week7/app.js",
+    "dev": "nodemon week7/app.js"
   }
 }
