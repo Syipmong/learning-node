@@ -2,14 +2,29 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
+const cluster = require('cluster')
+const http = require('http')
+const numCPUs = require('os').cpus().length
 
 
 const app = express()
 const PORT = 3000
 
-app.get('/api/name', (req, res) => {
-    res.send('Hello week7')
-})
+if(cluster.isMaster){
+    console.log(`Master ${process.pid} is running`)
+
+    for(let i = 0; i< numCPUs; i++){
+        cluster.fork()
+    }
+    
+    cluster.on('exit', (worker, code, signal) =>{
+        console.log(`Worker ${worker.process.pid} died`)
+    })
+
+
+}else{
+    http.createServer()
+}
 
 
 app.listen(
