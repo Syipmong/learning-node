@@ -1,4 +1,5 @@
 Week 1-2: Focus on setting up Node.js and understanding core modules, basic server, and file handling.
+
 Week 3-4: Learn Express.js, routing, middleware, and build simple RESTful APIs.
 Week 5: Explore working with databases (MongoDB or SQL).
 Week 6: Add user authentication with JWT and handle authorization.
