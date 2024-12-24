@@ -9,8 +9,8 @@ async function main() {
         port: 465,
         secure: true,
         auth: {
-            user: 'nxditechsolutions@gmail.com',
-            pass: 'hyixgdcdxkhpbwfy'
+            user: process.env.USER_MAIL,
+            pass: process.env.USER_PASS
         }
     });
 
@@ -19,7 +19,7 @@ async function main() {
     
     const info = await transporter.sendMail({
         from: 'Admin <admin@nxditechsolutions.com.ng>',
-        to: ['syipmong5@gmail.com','agbeyi1234@gmail.com','aliyu9466@bazeuniversity.edu.ng','nxditsolutions@gmail.com', 'said7533@bazeuniversity.edu.ng','estherbada15@gmail.com','owolabijunior12@gmail.com','abarimoshood@gmail.com','kimdhaviex1@gmail.com','Oladayoolaoye349@gmail.com','shitaldere18@gmail.com','waltertronics02@gmail.com','adeoyefav@gmail.com','khalifadalhat@gmail.com','Syipmong100@gmail.com'], 
+        to: [MAILS], 
         subject: 'Merry Christmas and a Happy New Year!',
         html: htmlContent
     });
